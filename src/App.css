@@ -1128,6 +1128,20 @@ contact__title = hero__title = booking-date__title
   z-index: 1;
 }
 
+/* Ejemplo para personalizar el calendario */
+.custom-calendar {
+  border: none !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100% !important;
+  font-family: inherit;
+}
+
+.react-calendar__tile--active {
+  background: #007bff !important; /* El color de tu marca */
+  border-radius: 6px;
+}
+
 /* ============================================
    PAYMENT
 ============================================ */

@@ -1,3 +1,5 @@
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'; // Estilos básicos
 import { useForm } from "../hooks/useForm";
 import { setDate } from "../redux/actions";
 import { dateValidators } from "../utils/validators";
@@ -9,37 +11,48 @@ const DateSelection = () => {
     dateValidators,
   );
 
+  // Función para adaptar el cambio del calendario a tu handleChange
+  const onCalendarChange = (selectedDate) => {
+    // Convertimos la fecha a string YYYY-MM-DD para mantener compatibilidad con tu lógica
+    const formattedDate = selectedDate.toISOString().split("T")[0];
+    
+    // Simulamos el evento que espera tu useForm
+    handleChange({
+      target: {
+        name: "reservationDate",
+        value: formattedDate,
+      },
+    });
+  };
+
   return (
     <section className="booking-date">
-      {/* Overlay */}
       <div className="hero__overlay"></div>
 
       <div className="booking-date__container">
         <header className="booking-date__header">
-          <h1 className="booking-date__title">
-            Save the <br />
-            Date
-          </h1>
+          <h1 className="booking-date__title">Save the <br /> Date</h1>
           <div className="booking-date__subtitle-container">
-            <i class="fa-regular fa-calendar"></i>
+            <i className="fa-regular fa-calendar"></i>
             <p className="booking-date__subtitle">Select a day</p>
           </div>
         </header>
 
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <div className="form__field">
-            <label htmlFor="reservationDate" className="form__label">
-              Class Date
-            </label>
-            <input
-              id="reservationDate"
-              type="date"
-              name="reservationDate"
-              value={values.date}
-              onChange={handleChange}
-              min={new Date().toISOString().split("T")[0]}
-              className="form__input"
-            />
+            <label className="form__label">Class Date</label>
+            
+            {/* --- CALENDARIO EN LUGAR DEL INPUT --- */}
+            <div className="calendar-wrapper">
+              <Calendar
+                onChange={onCalendarChange}
+                value={values.reservationDate ? new Date(values.reservationDate) : new Date()}
+                minDate={new Date()} // Evita seleccionar fechas pasadas
+                className="custom-calendar"
+              />
+            </div>
+            {/* -------------------------------------- */}
+
             {errors.reservationDate && (
               <span className="form__error">{errors.reservationDate}</span>
             )}
@@ -58,49 +71,6 @@ const DateSelection = () => {
       </div>
     </section>
   );
-
-  // return (
-  //   <section className="booking-date">
-  //     <div className="booking-date__container">
-  //       <header className="booking-date__header">
-  //         <h1 className="booking-date__title">Select a Day</h1>
-  //         <p className="booking-date__subtitle">
-  //           Choose the date for your surf session.
-  //         </p>
-  //       </header>
-
-  //       <form className="booking-date__form" onSubmit={(e) => e.preventDefault()}>
-  //         <div className="booking-date__field">
-  //           <label htmlFor="reservationDate" className="booking-date__label">
-  //             Class Date
-  //           </label>
-  //           <input
-  //             id="reservationDate"
-  //             type="date"
-  //             name="reservationDate"
-  //             value={values.date}
-  //             onChange={handleChange}
-  //             min={new Date().toISOString().split("T")[0]}
-  //             className="booking-date__input"
-  //           />
-  //           {errors.reservationDate && (
-  //             <span className="booking-date__error">
-  //               {errors.reservationDate}
-  //             </span>
-  //           )}
-  //         </div>
-
-  //         <button
-  //           type="button"
-  //           className="booking-date__button"
-  //           onClick={(e) => handleContinue(e, '/schedule')}
-  //         >
-  //           Next: Pick a Time
-  //         </button>
-  //       </form>
-  //     </div>
-  //   </section>
-  // );
 };
 
 export default DateSelection;
