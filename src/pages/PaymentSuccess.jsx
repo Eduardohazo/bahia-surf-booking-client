@@ -22,7 +22,7 @@ const PaymentSuccess = () => {
       }
 
       try {
-        const response = await axios.post("http://localhost:3000/api/payments/capture-order", {
+        const response = await axios.post("https://bahia-surf-res-api-1.onrender.com/api/payments/capture-order", {
           paypalOrderId,
           mongoOrderId,
         });
