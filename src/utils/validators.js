@@ -19,7 +19,8 @@ export const contactValidators = {
 
 // Date form validators
 export const dateValidators = {
-  reservationDate: (values) => (!values?.reservationDate ? "Date is required" : null),
+  reservationDate: (values) =>
+    !values?.reservationDate ? "Date is required" : null,
 };
 
 // Schedule form validators

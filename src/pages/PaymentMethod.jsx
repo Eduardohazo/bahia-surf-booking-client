@@ -2,9 +2,7 @@ import { useForm } from "../hooks/useForm";
 import { setPaymentMethod } from "../redux/actions/index.js";
 import { paymentValidators } from "../utils/validators";
 
-
 const PaymentMethod = () => {
-
   const { values, handleChange, errors, handleContinue } = useForm(
     (state) => state.paymentMethod,
     setPaymentMethod,
@@ -13,15 +11,21 @@ const PaymentMethod = () => {
 
   return (
     <section className="payment">
+      {/* Overlay */}
+      <div className="hero__overlay"></div>
+
       <div className="payment__container">
         <header className="payment__header">
           <h1 className="payment__title">Payment Method</h1>
-          <p className="payment__subtitle">
-            Select your preferred payment option.
-          </p>
+          <div className="payment_subtitle-container">
+            <p className="payment__subtitle">
+              Select your preferred payment option.
+            </p>
+          </div>
         </header>
 
         <form className="form">
+        <div className="form__payment-method">
           {["stripe", "paypal"].map((option) => (
             <label
               key={option}
@@ -49,11 +53,12 @@ const PaymentMethod = () => {
           )}
 
           <button
-            className="form__button"
+            className="form__button liquid-glass"
             onClick={(e) => handleContinue(e, "/order")}
           >
             Continue
           </button>
+          </div>
         </form>
       </div>
     </section>

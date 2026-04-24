@@ -2,7 +2,6 @@ import { SET_DATE } from "../types";
 
 const initialState = {
   reservationDate: "",
-  error: null,
 };
 
 function dateReducer(state = initialState, action) {

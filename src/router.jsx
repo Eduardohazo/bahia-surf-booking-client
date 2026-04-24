@@ -6,8 +6,6 @@ import { loadProducts } from "./redux/actions/index.js";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
-import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import PaymentMethod from "./pages/PaymentMethod";
 import Order from "./pages/Order";
@@ -37,11 +35,9 @@ const router = createBrowserRouter([
       },
       { path: "about", element: <About /> },
       { path: "blog", element: <Blog /> },
-      { path: "contact", element: <Contact /> },
       { path: "contact-info", element: <ContactInfo /> },
       { path: "date", element: <Date /> },
       { path: "schedule", element: <Schedule /> },
-      { path: "product/:id", element: <Product /> },
       { path: "cart", element: <Cart /> },
       { path: "payment-method", element: <PaymentMethod /> },
       { path: "order", element: <Order /> },

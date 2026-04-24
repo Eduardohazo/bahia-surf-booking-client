@@ -2,7 +2,6 @@ import { SET_SCHEDULE } from "../types";
 
 const initialState = {
   schedule: "",
-  error: null,
 };
 
 function scheduleReducer(state = initialState, action) {

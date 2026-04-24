@@ -74,6 +74,8 @@ export async function createOrder(
 
   const newOrder = OrderModel.createRequest(rawOrder);
 
+  console.log("NEW ORDER BEFORE CREATION:", newOrder);
+
   // 2. FETCH
   const response = await apiPost("/order/create-order", newOrder, signal);
 

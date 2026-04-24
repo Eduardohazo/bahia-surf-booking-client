@@ -4,8 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useMemo, useEffect } from "react";
 import withStatusHandler from "../hocs/withStatusHandler";
 
-
-const Order = ({ order, status, cart, contact, date, schedule, paymentMethod, all }) => {
+const Order = ({
+  order,
+  status,
+  cart,
+  contact,
+  date,
+  schedule,
+  paymentMethod,
+  all,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,28 +33,68 @@ const Order = ({ order, status, cart, contact, date, schedule, paymentMethod, al
 
   return (
     <section className="order">
-      <div className="order__container">
-        <h1>Review Your Order</h1>
-        <h3>Name</h3><p>{contact?.name || "-----"}</p>
-        <h3>Email</h3><p>{contact?.email || "-----"}</p>
-        <h3>Phone</h3><p>{contact?.phone || "-----"}</p>
-        <h3>Date</h3><p>{date?.reservationDate || "-----"}</p>
-        <h3>City</h3><p>{schedule?.schedule || "-----"}</p>
-        <h3>Payment Method</h3><p>{paymentMethod?.method || "No payment method selected"}</p>
-        
-        <h3>Items</h3>
-        {safeCart.map((item) => {
-          const product = safeProducts.find((p) => p?.id_class === item?.productId);
-          if (!product) return null;
-          return <div key={product.id_class}>{product.title} x {item.qty} = ${(product.price ?? 0) * item.qty}</div>;
-        })}
+      {/* Overlay */}
+      <div className="hero__overlay"></div>
 
-        <h2>Total: ${grandTotal}</h2>
-        {!order && (
-          <button onClick={() => dispatch(createOrder())} disabled={status === "LOADING"}>
-            {status === "LOADING" ? "Creating Order..." : "Create Order"}
-          </button>
-        )}
+      <div className="order__container">
+        <header className="order__header">
+          <h1 className="order__title">
+            Review Your <br /> 
+            Order
+          </h1>
+
+          <div className="order__subtitle-container">
+            <p className="order__subtitle">Sounds good?</p>
+          </div>
+        </header>
+
+        <div className="order__summary">
+
+          <h3 className="order__h3">Name</h3>
+          <p className="order__p">{contact?.name || "-----"}</p>
+          <h3 className="order__h3">Email</h3>
+          <p className="order__p">{contact?.email || "-----"}</p>
+          <h3 className="order__h3">Phone</h3>
+          <p className="order__p">{contact?.phone || "-----"}</p>
+          <h3 className="order__h3">Date</h3>
+          <p className="order__p">{date?.reservationDate || "-----"}</p>
+          <h3 className="order__h3">City</h3>
+          <p className="order__p">{schedule?.schedule || "-----"}</p>
+          <h3 className="order__h3">Payment Method</h3>
+          <p className="order__p">
+            {paymentMethod?.method || "No payment method selected"}
+          </p>
+
+          <h3 className="order__h3">Items</h3>
+          {safeCart.map((item) => {
+            const product = safeProducts.find(
+              (p) => p?.id_class === item?.productId,
+            );
+            if (!product) return null;
+            return (
+              <div className="order__div" key={product.id_class}>
+                {product.title} x {item.qty} = $
+                {(product.price ?? 0) * item.qty}
+              </div>
+            );
+          })}
+
+          <h2 className="order__h2">Total: ${grandTotal}</h2>
+
+          
+          {!order && (
+            <button
+              className="order__button liquid-glass"
+              onClick={() => dispatch(createOrder())}
+              disabled={status === "LOADING"}
+            >
+              {status === "LOADING" ? "Creating Order..." : "Create Order"}
+            </button>
+          )}
+
+
+
+        </div>
       </div>
     </section>
   );
@@ -64,9 +112,15 @@ function OrderContainer() {
   const { all } = useSelector((state) => state.products);
 
   return (
-    <OrderWithStatus 
-      status={status} order={order} cart={cart} contact={contact} 
-      date={date} schedule={schedule} paymentMethod={paymentMethod} all={all} 
+    <OrderWithStatus
+      status={status}
+      order={order}
+      cart={cart}
+      contact={contact}
+      date={date}
+      schedule={schedule}
+      paymentMethod={paymentMethod}
+      all={all}
     />
   );
 }

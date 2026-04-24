@@ -39,7 +39,7 @@ function HeroSection({ all }) {
           <div className="hero__buttons">
             {/* Booking button */}
             <button
-              className="hero__button"
+              className="hero__button liquid-glass"
               onClick={() => {
                 dispatch(addOneToCart(all[0]));
                 navigate("/cart");

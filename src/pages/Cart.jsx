@@ -22,9 +22,7 @@ export default function Cart() {
   ====================== */
 
   const total = validCartItems.reduce((sum, item) => {
-    const product = safeProducts.find(
-      (p) => p?.id_class === item?.productId
-    );
+    const product = safeProducts.find((p) => p?.id_class === item?.productId);
 
     if (!product) return sum;
 
@@ -39,8 +37,14 @@ export default function Cart() {
     return (
       <section className="cart">
         <div className="cart__container">
-          <h1 className="cart__title">Your Cart</h1>
-          <p className="cart__empty">Your cart is empty</p>
+          <header className="cart__header">
+            <h1 className="cart__title">YOUR CART</h1>
+
+            {/* TODO> Add person icon */}
+            <div className="cart__subtitle-container">
+              <p className="cart__subtitle">Cart is empty</p>
+            </div>
+          </header>
         </div>
       </section>
     );
@@ -52,13 +56,23 @@ export default function Cart() {
 
   return (
     <section className="cart">
+      {/* Overlay */}
+      <div className="hero__overlay"></div>
+
       <div className="cart__container">
-        <h1 className="cart__title">Your Cart</h1>
+        <header className="cart__header">
+          <h1 className="cart__title">SERVICE SELECTED</h1>
+
+          {/* TODO> Add person icon */}
+          <div className="cart__subtitle-container">
+            <p className="cart__subtitle">Check your service</p>
+          </div>
+        </header>
 
         <div className="cart__list">
           {validCartItems.map((item) => {
             const product = safeProducts.find(
-              (p) => p?.id_class === item?.productId
+              (p) => p?.id_class === item?.productId,
             );
 
             if (!product) return null;
@@ -70,9 +84,7 @@ export default function Cart() {
                     {product?.title || "Unknown product"}
                   </p>
 
-                  <p className="cart-item__price">
-                    ${product?.price ?? 0}
-                  </p>
+                  <p className="cart-item__price">${product?.price ?? 0}</p>
 
                   <div className="cart-item__qty">
                     <button
@@ -85,7 +97,6 @@ export default function Cart() {
                     <span className="cart-item__qty-value">
                       {item?.qty ?? 0}
                     </span>
-
                   </div>
                 </div>
               </div>
@@ -98,9 +109,11 @@ export default function Cart() {
           <p className="cart__summary-total">${total.toFixed(2)}</p>
         </div>
 
-        <Link to="/contact-info" className="cart__checkout-button">
-          Checkout
-        </Link>
+        <div className="form__button-container">
+          <Link to="/contact-info" className="cart__checkout-button liquid-glass">
+            Checkout
+          </Link>
+        </div>
       </div>
     </section>
   );

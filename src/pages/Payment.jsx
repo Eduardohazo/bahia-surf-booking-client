@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPaypalOrder } from "../redux/actions";
 import withStatusHandler from "../hocs/withStatusHandler";
 
-
-function Payment({order}) {
+function Payment({ order }) {
   // We only need the order from the state now.
   const dispatch = useDispatch();
 
@@ -14,44 +13,54 @@ function Payment({order}) {
 
   // TODO: Ad fallback cases
   return (
-    <section className="order">
-      <div className="order__container">
-        <h1>Confirm & Pay</h1>
+    <section className="summary">
+      {/* Overlay */}
+      <div className="hero__overlay"></div>
 
-        <div className="order__section">
-          <h3>Booking Details</h3>
-          <p>
-            <strong>Order ID:</strong> {order.id_order}
+      <div className="summary__container">
+        <header className="summary__header">
+          <h1 className="summary__title">Booking Details</h1>
+
+          <div className="summary__subtitle-container">
+            <p className="summary__subtitle">One last check before done!</p>
+          </div>
+        </header>
+
+        <div className="summary__section">
+          <h3>General Information</h3>
+
+          <p className="summary__p">
+            <strong>Order ID: </strong>{order.id_order}
           </p>
-          <p>
-            <strong>Date:</strong> {order.reservationDate}
+          <p className="summary__p">
+            <strong>Date: </strong>{order.reservationDate}
           </p>
-          <p>
-            <strong>Schedule:</strong> {order.schedule}
+          <p className="summary__p">
+            <strong>Schedule: </strong>{order.schedule}
           </p>
         </div>
 
-        <div className="order__section">
+        <div className="summary__section">
           <h3>Customer Information</h3>
-          <p>
-            <strong>Name:</strong> {order.name || "-----"}
+          <p className="summary__p">
+            <strong>Name: </strong> {order.name || "-----"}
           </p>
-          <p>
-            <strong>Email:</strong> {order.email || "-----"}
+          <p className="summary__p">
+            <strong>Email: </strong> {order.email || "-----"}
           </p>
-          <p>
-            <strong>Phone:</strong> {order.phone || "-----"}
+          <p className="summary__p">
+            <strong>Phone: </strong> {order.phone || "-----"}
           </p>
         </div>
 
-        <div className="order__section">
+        <div className="summary__section">
           <h3>Items</h3>
           {/* We map directly from order.items. 
               Ensure your backend returns the price/name in this array. */}
           {order.items &&
             order.items.map((item, index) => (
               <div key={item.productId || index} className="order__item">
-                <p>
+                <p className="summary__p">
                   {item.name || `Product ${item.productId}`} x 1
                   <span> — ${item.price.toFixed(2)}</span>
                 </p>
@@ -59,19 +68,20 @@ function Payment({order}) {
             ))}
         </div>
 
-        <div className="order__footer">
+        <div className="summary__section">
           <h3>
             Total Amount: $
             {order.items
               ?.reduce((acc, item) => acc + item.price, 0)
               .toFixed(2) || "0.00"}
           </h3>
-          <p>
-            Status:{" "}
-            <span style={{ color: "orange" }}>{order.status || "PENDING"}</span>
+
+          <p className="summary__p">
+            Status: <span style={{ color: "orange" }}>{order.status || "PENDING"}</span>
           </p>
+
           <button
-            className="btn-pay"
+            className="summary__button liquid-glass"
             onClick={handlePay}
             disabled={order.status === "PAID"}
           >
@@ -86,13 +96,9 @@ function Payment({order}) {
 const PaymentWithStatus = withStatusHandler(Payment);
 
 function PaymenContainer() {
-    const { order, status } = useSelector((state) => state.order);
+  const { order, status } = useSelector((state) => state.order);
 
-    return (
-      <PaymentWithStatus 
-        status={status} order={order}
-      />
-    );
-};
+  return <PaymentWithStatus status={status} order={order} />;
+}
 
 export default PaymenContainer;

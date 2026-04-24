@@ -11,8 +11,8 @@ export default function PaymentCancel() {
       <h1>Payment Cancelled</h1>
       {orderId && <p>Your order ID: {orderId}</p>}
       <p>You cancelled the payment. You can try again.</p>
-      <button onClick={() => navigate("/payment")}>Retry Payment</button>
-      <button onClick={() => navigate("/cart")}>Back to Cart</button>
+      <button className="liquid-glass" onClick={() => navigate("/payment")}>Retry Payment</button>
+      <button className="liquid-glass" onClick={() => navigate("/cart")}>Back to Cart</button>
     </div>
   );
 }

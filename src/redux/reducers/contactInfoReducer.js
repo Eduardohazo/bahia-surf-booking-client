@@ -4,7 +4,6 @@ const initialState = {
   name: "",
   phone: "",
   email: "",
-  error: null,
 };
 
 function contactInfoReducer(state = initialState, action) {

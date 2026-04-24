@@ -9,7 +9,7 @@ export const useForm = (selector, action, validators = {}) => {
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
 
     // Run validation if validator exists for this field
@@ -31,22 +31,22 @@ export const useForm = (selector, action, validators = {}) => {
   };
 
   const handleContinue = (e, path) => {
-    console.log(path);
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (validateAll()) {
       navigate(path);
     }
   };
 
-  const validateAll = () => {
+  const validateAll = (time) => {
     const newErrors = {};
     let valid = true;
 
     for (const key in validators) {
-      const error = validators[key](values);
+      const error = validators[key](time ? time : values);
       if (error) valid = false;
       newErrors[key] = error;
     }
+
     setErrors(newErrors);
     return valid;
   };

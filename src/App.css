@@ -1,20 +1,14 @@
-/* ============================================
-   ROOT & RESET
-============================================ */
+/* STYLES ORDER:
+Settings → global variables
+Base → normalize/reset browser styles
+Elements → default HTML styling
+Layout Helpers → page structure (wrappers, grids, flex, containers)
+Components (BEM) → actual UI pieces
+Utilities → small overrides */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  list-style: none;
-  color: #000;
-}
-
-/* 
-background: url(<path-to-image>) lightgray 50% / cover no-repeat;
-width: 4.75rem;
-height: 3.375rem;
-aspect-ratio: 38/27; */
+/* ==================================================
+   VARIABLES & TOKENS
+=================================================== */
 
 :root {
   --main-dark-green: #17503f;
@@ -65,23 +59,23 @@ aspect-ratio: 38/27; */
   --hero-btn-line-height: 1.3125rem;
 }
 
-/* ============================================
-   SHARED UTILITIES / UTILITY CLASSES
-============================================ */
+/* ==================================================
+   BASE & RESET 
+=================================================== */
 
-/* Card base — used by .product-card, .cart-item, .cart__summary */
-.card {
-  background: #fff;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  list-style: none;
+  color: #000;
 }
 
-/* ============================================
-   HEADER
-============================================ */
+/* ==================================================
+   DEFAUL / GENERAL AND NATIVE SELECTORS
+=================================================== */
+
+/* Header */
 
 .header {
   display: flex;
@@ -95,12 +89,24 @@ aspect-ratio: 38/27; */
   transition: all 0.3s ease-in-out;
 }
 
-.header-up {
-  transform: translateY(-100%);
+/* Footer */
+
+.footer {
+  background: var(--main-dark-green);
+  padding: 40px 20px;
+  text-align: center;
 }
-.header-down {
-  transform: translateY(0);
-}
+
+/* ==================================================
+   LAYOUT HELPERS 
+   styles shared by components as helpers
+=================================================== */
+
+/* ==================================================
+   BEM METHODOLOGY RULES / COMPONENTS
+==================================================== */
+
+/* Header */
 
 .header__logo {
   display: flex;
@@ -109,120 +115,19 @@ aspect-ratio: 38/27; */
   width: 20%;
 }
 
-.header__nav {
-  width: 40%;
-}
-
-.header__list {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
 .header__logo-image {
   width: 10rem;
 }
-.header__button {
-  padding: 1rem;
+
+/* Footer */
+
+.footer__content {
+  font-size: 12px;
+  color: var(--color-white);
+  letter-spacing: 0.6px;
 }
 
-.header__link {
-  position: relative;
-}
-
-.header__link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: var(--main-dark-green);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-.header__dropdown {
-  display: none;
-  padding-right: 3rem;
-  background-color: var(--main-dark-green);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-body .header__item--dropdown {
-  padding: 0;
-}
-
-.header__icon {
-  margin-left: 0.5rem;
-}
-
-.toggle-dropdown-show {
-  display: block;
-  position: absolute;
-  z-index: 300;
-}
-
-.header__link--dropdown {
-  width: 100%;
-}
-
-.toggle-arrow-show {
-  transform: rotateZ(180deg);
-  transition: transform 0.3s ease-in-out;
-}
-
-.header__dropdown-item {
-  padding: 1rem 0;
-}
-.header__dropdown > :first-child {
-  padding-top: 2rem;
-}
-
-.header__burger {
-  display: none;
-}
-
-/* ============================================
-   FOOTER
-============================================ */
-
-.footer {
-  padding: 2rem;
-  border-top: 1px solid #eee;
-  margin-top: 3rem;
-}
-
-.footer-columns {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-}
-
-.footer-columns h4 {
-  margin-bottom: 0.5rem;
-}
-
-.footer-columns a {
-  display: block;
-  margin-bottom: 0.25rem;
-  text-decoration: none;
-  color: #333;
-}
-
-.footer-columns a.active {
-  font-weight: 600;
-}
-
-.footer-bottom {
-  font-size: 0.9rem;
-  color: #777;
-}
-
-/* ============================================
-   PAGE STATE (loading / error / empty)
-============================================ */
+/* With Status Handler / Page State (loading / error / empty) */
 
 .page-state {
   min-height: 100vh;
@@ -274,6 +179,38 @@ body .header__item--dropdown {
   font-style: italic;
 }
 
+/* ==================================================
+   SHARED UTILITIES / UTILITY CLASSES
+==================================================== */
+
+.header-up {
+  transform: translateY(-100%);
+}
+.header-down {
+  transform: translateY(0);
+}
+
+/* ===================================================
+   RESPONSIVE RULES / MEDIA QUERIES
+==================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ============================================
    HERO
 ============================================ */
@@ -283,7 +220,7 @@ body .header__item--dropdown {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -297,16 +234,11 @@ body .header__item--dropdown {
   aspect-ratio: 361/203;
 }
 
-/* 
-contact = hero = booking-date
-contact__container = hero__content = booking-date__container
-contact__header = hero__content-div-one
-contact__title = hero__title = booking-date__title
-*/
-
-.hero
-.contact.about-us-section,
-.booking-date {
+.hero .contact.about-us-section,
+.cart,
+.booking-date,
+.summary,
+.payment {
   position: relative;
   height: 100vh;
   overflow: hidden;
@@ -336,13 +268,19 @@ contact__title = hero__title = booking-date__title
   z-index: -1;
 }
 
+.hero__content {
+  height: 100vh;
+}
+
 /* Contenedor interno */
 .hero__content,
 .contact__container,
-.booking-date__container {
+.booking-date__container,
+.order__container,
+.summary__container,
+.payment__container {
   position: relative;
   z-index: 1;
-  height: 100%;
   padding: 2rem;
   width: 100%;
 }
@@ -374,7 +312,8 @@ contact__title = hero__title = booking-date__title
 }
 
 .hero__button,
-.form__button {
+.form__button,
+.cart__checkout-button {
   display: flex;
   width: var(--hero-btn-width);
   height: var(--hero-btn-height);
@@ -407,11 +346,19 @@ contact__title = hero__title = booking-date__title
 .hero__badge,
 .hero__title,
 .contact__title,
+.cart__title,
 .booking-date__title,
+.order__title,
+.summary__title,
+.payment__title,
 .hero__subtitle,
+.cart__subtitle,
 .booking-date__subtitle,
 .contact__subtitle,
-.hero__buttons {
+.order__subtitle,
+.summary__subtitle,
+.hero__buttons,
+.payment__subtitle {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 1s ease forwards;
@@ -429,7 +376,11 @@ contact__title = hero__title = booking-date__title
 
 .hero__title,
 .contact__title,
-.booking-date__title {
+.cart__title,
+.booking-date__title,
+.order__title,
+.summary__title,
+.payment__title {
   margin-bottom: 20px;
   transform: translateY(50px);
   animation-delay: 0.6s;
@@ -754,20 +705,21 @@ contact__title = hero__title = booking-date__title
 ============================================ */
 
 .cart {
-  padding: 3rem 2rem;
-  padding-top: 8rem;
-  background-color: var(--main-dark-green);
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  color: #fff;
 }
 
 .cart__container {
   max-width: 1100px;
   margin: 0 auto;
-}
-
-.cart__title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
 }
 
 .cart__list {
@@ -801,6 +753,7 @@ contact__title = hero__title = booking-date__title
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .cart-item__title {
@@ -814,9 +767,9 @@ contact__title = hero__title = booking-date__title
 
 .cart-item__qty {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-top: 0.5rem;
 }
 
 .cart-item__qty-button {
@@ -861,22 +814,6 @@ contact__title = hero__title = booking-date__title
   margin-top: 2rem;
   display: flex;
   justify-content: flex-end;
-}
-
-.cart__checkout-button {
-  padding: 0.8rem 2rem;
-  border-radius: var(--radius-btn);
-  text-decoration: none;
-  font-weight: 600;
-  background: var(--btn-bg);
-  color: #fff;
-  transition:
-    background 0.2s ease,
-    transform 0.1s ease;
-}
-
-.cart__checkout-button:hover {
-  background: var(--btn-bg-hover);
 }
 
 /* ============================================
@@ -1002,7 +939,11 @@ contact__title = hero__title = booking-date__title
 
 .contact__subtitle-container,
 .booking-date__subtitle-container,
-.hero__subtitle-container {
+.cart__subtitle-container,
+.hero__subtitle-container,
+.order__subtitle-container,
+.summary__subtitle-container,
+.payment_subtitle-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1010,7 +951,12 @@ contact__title = hero__title = booking-date__title
 }
 
 .contact__subtitle,
-.booking-date__subtitle {
+.booking-date__subtitle,
+.order__subtitle,
+.cart__subtitle,
+.summary__subtitle,
+.booking-date__subtitle,
+.payment__subtitle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1028,7 +974,7 @@ contact__title = hero__title = booking-date__title
   border: none;
   border-radius: 3rem;
   border-bottom: 1px solid #e5e5e5;
-  padding: .3rem 0;
+  padding: 0.3rem 0;
   font-size: 1rem;
   background: var(--color-white);
   transition: border-color 0.3s ease;
@@ -1092,12 +1038,12 @@ contact__title = hero__title = booking-date__title
    CONTACT
 ============================================ */
 
-.contact,
-.booking-date {
+.contact {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: auto;
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -1107,7 +1053,11 @@ contact__title = hero__title = booking-date__title
 
 .contact__header,
 .booking-date__header,
-.hero__content-div-one {
+.hero__content-div-one,
+.cart__header,
+.order__header,
+.summary__header,
+.payment__header {
   display: flex;
   flex-direction: column;
   padding-top: 10rem;
@@ -1122,58 +1072,135 @@ contact__title = hero__title = booking-date__title
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+/* Calendar container */
+/* --- RESPONSIVE WRAPPER --- */
+.calendar-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* --- MAIN CALENDAR CONTAINER --- */
+.react-calendar.custom-calendar {
+  width: 100%;
+  max-width: 400px; /* Limits size on Desktop */
+  background: white;
+  border: none;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  font-family: "Inter", sans-serif; /* Or your preferred font */
+}
+
+/* --- NAVIGATION (Month/Year) --- */
+.react-calendar__navigation {
+  margin-bottom: 15px;
+  height: 50px;
+}
+
+.react-calendar__navigation button {
+  color: #34b68d; /* Your vibrant green */
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: none;
+}
+
+.react-calendar__navigation button:enabled:hover {
+  background-color: #f0fdf9;
+  border-radius: 12px;
+}
+
+/* --- WEEKDAYS (S M T W T F S) --- */
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #aab6b0;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* --- DAY TILES (Responsiveness Fix) --- */
+.react-calendar__tile {
+  aspect-ratio: 1 / 1; /* Keeps them perfectly square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 0.95rem;
+  color: #4f7361;
+  transition: all 0.2s ease;
+}
+
+/* --- SELECTED DAY (The Green Circle) --- */
+.react-calendar__tile--active {
+  background: #2a5a4b; /* Dark green from your design */
+  color: white;
+  font-weight: 700;
+  border-radius: 50%; /* Forces the circle */
+  transform: scale(0.85); /* Slightly smaller so it looks clean */
+}
+
+/* --- HOVER & TODAY --- */
+.react-calendar__tile:enabled:hover {
+  background-color: #e6f7f2;
+  border-radius: 50%;
+}
+
+.react-calendar__tile--now {
+  background: #f0fdf9;
+  color: #34b68d;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+/* TINE */
+
+.form__schedule-grid-container {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 70%;
+}
+
+/* ============================================
+   PAYMENT METHOD
+============================================ */
+
+.payment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
   text-align: center;
   overflow: hidden;
   position: relative;
   z-index: 1;
 }
 
-/* Ejemplo para personalizar el calendario */
-.custom-calendar {
-  border: none !important;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  width: 100% !important;
-  font-family: inherit;
-}
-
-.react-calendar__tile--active {
-  background: #007bff !important; /* El color de tu marca */
-  border-radius: 6px;
-}
-
-/* ============================================
-   PAYMENT
-============================================ */
-
-.payment {
-  min-height: 100vh;
-  background: #fff;
-  padding: 120px 0;
-  color: #111;
-  font-family: var(--font-base);
-}
-
-.payment__container {
-  width: 90%;
-  max-width: 620px;
-  margin: 0 auto;
-}
-
-.payment__header {
-  margin-bottom: 60px;
-}
-
-.payment__title {
-  font-size: 2.6rem;
-  font-weight: 600;
-  letter-spacing: -1px;
-  margin-bottom: 12px;
-}
-
-.payment__subtitle {
-  font-size: 0.95rem;
-  color: #777;
+.form__payment-method {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 60vh;
 }
 
 /* ============================================
@@ -1181,86 +1208,184 @@ contact__title = hero__title = booking-date__title
 ============================================ */
 
 .order {
-  min-height: 100vh;
-  background: #fff;
-  padding: 100px 0;
-  color: #111;
-  font-family: var(--font-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  color: #fff;
 }
 
 .order__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 90%;
   max-width: 980px;
   margin: 0 auto;
 }
 
-.order__container h1 {
-  font-size: 3rem;
-  font-weight: 600;
-  letter-spacing: -1px;
-  margin-bottom: 60px;
-  text-transform: uppercase;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 24px;
+/* CARD */
+.order__summary {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  transition: all 0.2s ease;
 }
 
-.order__container h3 {
-  font-size: 0.8rem;
+/* HEADINGS */
+.order__h3 {
+  font-size: 0.75rem;
   font-weight: 600;
+  color: #6b7280;
+  margin-top: 12px;
+  margin-bottom: 4px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #777;
-  margin-top: 40px;
-  margin-bottom: 6px;
+  letter-spacing: 0.5px;
 }
 
-.order__container p {
-  font-size: 1rem;
+/* VALUES */
+.order__p {
+  font-size: 0.9rem;
+  color: #064e3b;
+  background: #ecfdf5;
+  border-radius: 8px;
+  padding: 8px 10px;
   margin: 0;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #f1f1f1;
-}
-
-.order__container > div {
-  font-size: 1rem;
-  padding: 16px 0;
-  border-bottom: 1px solid #f1f1f1;
   display: flex;
-  justify-content: space-between;
-  font-weight: 500;
+  align-items: center;
+  justify-content: center;
 }
 
-.order__container h2 {
-  margin-top: 60px;
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  display: flex;
-  justify-content: space-between;
-  border-top: 2px solid #111;
-  padding-top: 24px;
+/* ITEMS */
+.order__div {
+  font-size: 0.9rem;
+  color: #065f46;
+  background: #f0fdf4;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 6px;
 }
 
-.order button {
-  margin-top: 40px;
-  padding: 16px 32px;
-  background: #111;
-  color: #fff;
+/* TOTAL */
+.order__h2 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #065f46;
+  text-align: center;
+}
+
+/* BUTTON */
+.order__button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
   border: none;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  border-radius: 10px;
+  background: #10b981;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.order button:hover {
-  background: #000;
+.order__button:hover {
+  background: #059669;
 }
-.order button:disabled {
-  background: #d9d9d9;
-  color: #888;
-  cursor: not-allowed;
+
+/* CHECK ICON */
+.order__p::before,
+.order__div::before {
+  content: "✔";
+  color: #10b981;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* ============================================
+   PAYMENT SUMMARY
+============================================ */
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+.summary__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.summary__section {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  margin: 0.5rem 0;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  transition: all 0.2s ease;
+}
+
+.summary__p {
+  font-size: 0.9rem;
+  color: #064e3b;
+  background: #ecfdf5;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary__button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #10b981;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.summary__button {
+  background: #059669;
 }
 
 /* ============================================
@@ -1271,13 +1396,11 @@ contact__title = hero__title = booking-date__title
   padding: 50px 20px;
   display: flex;
   justify-content: center;
-  background-color: var(--main-dark-green);
   min-height: 80vh;
 }
 
 .thank-you__card {
-  background-color: var(--main-dark-green);
-  padding: 40px;
+  padding: 30% 40px;
   border-radius: var(--radius-card);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   max-width: 500px;
@@ -1285,9 +1408,6 @@ contact__title = hero__title = booking-date__title
   text-align: center;
 }
 
-.thank-you__header {
-  margin-bottom: 30px;
-}
 .thank-you__title {
   margin: 0 0 10px;
   color: #2d3436;
@@ -1298,7 +1418,6 @@ contact__title = hero__title = booking-date__title
 
 .thank-you__receipt {
   text-align: left;
-  background-color: var(--main-dark-green);
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #eee;
@@ -1358,7 +1477,6 @@ contact__title = hero__title = booking-date__title
 }
 
 .thank-you__btn--download {
-  background-color: var(--main-dark-green);
   color: #fff;
 }
 .thank-you__link {
@@ -1457,6 +1575,13 @@ contact__title = hero__title = booking-date__title
 
 /* ── Mobile ≤ 480px ── */
 @media (max-width: 480px) {
+  .react-calendar.custom-calendar {
+    padding: 10px;
+    border-radius: 16px;
+  }
+  .react-calendar__navigation button {
+    font-size: 0.95rem;
+  }
   .page-state {
     padding: 1.5rem;
   }
@@ -1538,6 +1663,33 @@ contact__title = hero__title = booking-date__title
   }
 }
 
+@media (min-width: 640px) {
+  .order__summary {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .order__h3 {
+    font-size: 0.8rem;
+  }
+
+  .order__p,
+  .order__div {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+
+  .order__h2 {
+    font-size: 1.3rem;
+  }
+}
+
+.order button:disabled {
+  background: #d9d9d9;
+  color: #888;
+  cursor: not-allowed;
+}
+
 /* ── ≤ 768px shared ── */
 @media (max-width: 768px) {
   .cart-item {
@@ -1552,32 +1704,6 @@ contact__title = hero__title = booking-date__title
   }
   .cart__checkout {
     justify-content: center;
-  }
-  .cart__checkout-button {
-    width: 100%;
-    text-align: center;
-  }
-
-  .payment {
-    padding: 80px 0;
-  }
-  .payment__title {
-    font-size: 2rem;
-  }
-
-  .order__container h1 {
-    font-size: 2rem;
-  }
-  .order__container > div {
-    flex-direction: column;
-    gap: 6px;
-  }
-  .order__container h2 {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .order button {
-    width: 100%;
   }
 }
 
@@ -1598,6 +1724,34 @@ contact__title = hero__title = booking-date__title
   }
   .about-us-section__about-us-text {
     text-align: left;
+  }
+
+  .order {
+    align-items: center;
+  }
+
+  .order__summary {
+    max-width: 480px;
+    padding: 28px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+  }
+
+  .order__h3 {
+    font-size: 0.85rem;
+  }
+
+  .order__p,
+  .order__div {
+    font-size: 1rem;
+  }
+
+  .order__h2 {
+    font-size: 1.5rem;
+  }
+
+  .order__button {
+    font-size: 1rem;
+    padding: 12px;
   }
 }
 
@@ -1727,5 +1881,25 @@ contact__title = hero__title = booking-date__title
       opacity: 0;
     }
   }
+}
+
+/* Liguid glass */
+.liquid-glass {
+  border-radius: 1.5625rem;
+  background-color: #34b68d80;
+  outline: 1px solid #00d5be;
+
+  /* Text */
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  font-weight: 500;
+
+  /* Blur effect (glass look) */
+  backdrop-filter: blur(1px);
+
+  /* Glow + depth */
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 12px rgba(52, 182, 141, 0.4);
 }
 

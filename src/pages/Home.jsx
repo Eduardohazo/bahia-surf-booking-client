@@ -1,21 +1,23 @@
 // src/pages/Home.jsx
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, 
+  // useDispatch 
+} from "react-redux";
 import withStatusHandler from "../hocs/withStatusHandler";
-import { addOneToCart } from "../redux/actions/index.js";
-import bookingCardImage from "../assets/images/booking-card-image.png";
+// import { addOneToCart } from "../redux/actions/index.js";
+// import bookingCardImage from "../assets/images/booking-card-image.png";
 import HeroSection from "../components/HeroSection";
 import AboutUsSection from "../components/AboutUsSection.jsx";
 import ProcessCreation from "../components/ProcessCreation.jsx";
 
 // 1. THE VIEW: Only contains success layout
 const Home = ({ all }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <>
       <HeroSection textContent="Hero Section" all={all} />
-      <AboutUsSection />
-      <section className="">
+      {/* <AboutUsSection /> */}
+      {/* <section className="">
         <div className="products-grid">
           {all.map((p) => (
             <div className="product-card" key={p?.id_class}>
@@ -34,8 +36,8 @@ const Home = ({ all }) => {
             </div>
           ))}
         </div>
-      </section>
-      <ProcessCreation />
+      </section> */}
+      {/* <ProcessCreation /> */}
     </>
   );
 };

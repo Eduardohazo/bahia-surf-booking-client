@@ -1,34 +1,13 @@
 import {
   useEffect,
-  // useState,
-  useCallback,
 } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { getOrder } from "../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
+import withStatusHandler from "../hocs/withStatusHandler.jsx";
 import { RequestStatus } from "../enums/RequestStatus.js";
 
-export default function ThankYouPage() {
-  const { order, status } = useSelector((state) => state.order);
-  const dispatch = useDispatch();
-  const [searchParams] = useSearchParams();
-
-  // We wrap the fetch in useCallback to prevent it from changing on every render
-  const fetchOrder = useCallback(async (orderId) => {
-    try {
-      // Execute the thunk
-      await dispatch(getOrder(orderId));
-    } catch (err) {
-      console.error("Order fetch failed:", err);
-    } finally {
-      // setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const orderId = searchParams.get("orderId");
-    if (orderId) fetchOrder(orderId);
-  }, [searchParams, fetchOrder]);
+function ThankYouPage({order, status}) {
 
   const handleDownloadReceipt = () => {
     if (!order) return;
@@ -63,101 +42,14 @@ export default function ThankYouPage() {
     URL.revokeObjectURL(url);
   };
 
-  if (
-    status === RequestStatus.requestPhase.LOADING ||
-    status === RequestStatus.requestPhase.IDLE
-  ) {
+  // Unusual case where IDLE status implies showing loader
+  if (status === RequestStatus.requestPhase.IDLE) {
     return (
       <div className="page-loader">
         <div className="page-state page-state--loading">
           <div className="page-state__content">
-            <p className="page-state__message">Loading paid order...</p>
+            <p className="page-state__message">Loading...</p>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === RequestStatus.errorPhase.ERROR) {
-    return (
-      <div className="page-state page-state--error">
-        <div className="page-state__content">
-          <h2 className="page-state__title">Something went wrong</h2>
-          <p className="page-state__message">We couldn't get the order.</p>
-          <button
-            className="page-state__button"
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === RequestStatus.errorPhase.NETWORK_ERROR) {
-    return (
-      <div className="page-state page-state--error">
-        <div className="page-state__content">
-          <h2 className="page-state__title">Network error</h2>
-          <p className="page-state__message">We couldn't get the order.</p>
-          <button
-            className="page-state__button"
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === RequestStatus.responsePhase.INPUT_VALIDATION_ERROR) {
-    return (
-      <div className="page-state page-state--error">
-        <div className="page-state__content">
-          <h2 className="page-state__title">Something went wrong!</h2>
-          <p className="page-state__message">Bad data sent.</p>
-          <button
-            className="page-state__button"
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === RequestStatus.responsePhase.VALIDATION_ERROR) {
-    return (
-      <div className="page-state page-state--error">
-        <div className="page-state__content">
-          <h2 className="page-state__title">Something went wrong!</h2>
-          <p className="page-state__message">Bad data sent.</p>
-          <button
-            className="page-state__button"
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === RequestStatus.responsePhase.ORDER_NOT_FOUND) {
-    return (
-      <div className="page-state page-state--error">
-        <div className="page-state__content">
-          <h2 className="page-state__title">Error 404</h2>
-          <p className="page-state__message">Order not found.</p>
-          <button
-            className="page-state__button"
-            onClick={() => window.location.reload()}
-          >
-            Try again
-          </button>
         </div>
       </div>
     );
@@ -217,7 +109,7 @@ export default function ThankYouPage() {
         <footer className="thank-you__actions">
           <button
             onClick={handleDownloadReceipt}
-            className="thank-you__btn thank-you__btn--download"
+            className="thank-you__btn thank-you__btn--download liquid-glass"
           >
             Download Receipt (.txt)
           </button>
@@ -229,3 +121,23 @@ export default function ThankYouPage() {
     </div>
   );
 }
+
+const ThankYouPageWithStatus = withStatusHandler(ThankYouPage);
+
+function ThankYouPageContainer() {
+  const { order, status } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+
+  // Use effect on container to prevent useEffects 
+  // re executions everytime it mounts child component again
+  useEffect(() => {
+    const orderId = searchParams.get("orderId");
+    if (!orderId) return;
+    dispatch(getOrder(orderId));
+  }, []);
+
+  return <ThankYouPageWithStatus status={status} order={order} />;
+}
+
+export default ThankYouPageContainer;
