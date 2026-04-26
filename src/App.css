@@ -655,6 +655,10 @@ Utilities → small overrides */
   color: #fff;
 }
 
+.booking-date__container .form {
+  height: 100%;
+}
+
 /* Calendar container */
 /* --- RESPONSIVE WRAPPER --- */
 .calendar-wrapper {
