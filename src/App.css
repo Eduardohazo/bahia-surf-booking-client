@@ -106,7 +106,8 @@ Utilities → small overrides */
    BEM METHODOLOGY SHARED RULES / 
 ==================================================== */
 
-.hero .contact,
+.hero,
+.contact,
 .about-us-section,
 .cart,
 .booking-date,
@@ -238,7 +239,7 @@ Utilities → small overrides */
 .payment__header {
   display: flex;
   flex-direction: column;
-  padding-top: 10rem;
+  padding-top: 6rem;
 }
 
 /* ==================================================
@@ -318,7 +319,7 @@ Utilities → small overrides */
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  padding-top: 10rem;
+  padding-top: 5rem;
 }
 
 .hero__content-div-two {
@@ -389,7 +390,7 @@ Utilities → small overrides */
 /* Cart */
 
 .cart {
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -398,8 +399,13 @@ Utilities → small overrides */
 }
 
 .cart__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   max-width: 520px;
   width: 100%;
+  height: 100vh;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -418,7 +424,7 @@ Utilities → small overrides */
 
 .cart__subtitle {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--h3-font-color);
 }
 
 .cart__list {
@@ -527,7 +533,12 @@ Utilities → small overrides */
 /* Form */
 
 .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   width: 100%;
+  height: 60vh;
 }
 
 .form__field {
@@ -535,6 +546,7 @@ Utilities → small overrides */
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .form__label {
@@ -569,7 +581,6 @@ Utilities → small overrides */
 /* Shared CTA button for contact, booking, payment */
 
 .form__button-container {
-  height: 40vh;
   display: flex;
   justify-self: center;
   align-items: center;
