@@ -6,6 +6,52 @@ Layout Helpers → page structure (wrappers, grids, flex, containers)
 Components (BEM) → actual UI pieces
 Utilities → small overrides */
 
+/* RULES DECLARATIONS ORDER: 
+
+Layout (x,y axis position)
+Stacking (z axis position)
+Box Model
+Typography
+Visual
+Effects
+Misc
+
+.selector {
+  1. Layout 
+  display: flex;
+  position: relative;
+  top: 0;
+
+  2 Stacking
+  z-index: 100;
+
+  3. Box model 
+  width: 100%;
+  height: 200px;
+  margin: 0;
+  padding: 16px;
+
+  4. Typography 
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+
+  5. Visual 
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  6. Effects
+  transition: all 0.3s ease;
+  opacity: 1;
+
+  7. Misc 
+  cursor: pointer;
+}
+*/
+
 /* ==================================================
    VARIABLES & TOKENS
 =================================================== */
@@ -72,15 +118,81 @@ Utilities → small overrides */
 }
 
 /* ==================================================
-   DEFAUL / GENERAL AND NATIVE SELECTORS
+   DEFAULT / GENERAL AND NATIVE SELECTORS
 =================================================== */
 
 /* Header */
 
-.header {
+.flex,
+.header,
+.header__logo,
+.booking-date__subtitle-container,
+.form__payment-method {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+/* gato */
+
+.hero__button,
+.form__button,
+.cart__checkout-button,
+.contact__subtitle-container,
+.booking-date__subtitle-container,
+.cart__subtitle-container,
+.hero__subtitle-container,
+.order__subtitle-container,
+.summary__subtitle-container,
+.payment_subtitle-container,
+.contact__subtitle,
+.booking-date__subtitle,
+.order__subtitle,
+.cart__subtitle,
+.summary__subtitle,
+.payment__subtitle,
+.hero,
+.hero__buttons,
+.hero__subtitle-two,
+.cart,
+.form__field,
+/* Shared CTA button for contact, booking, payment */
+.form__button-container,
+.contact,
+.booking-date,
+.react-calendar__tile
+.form__schedule-grid-container,
+.schedule-grid,
+.payment,
+.order,
+.order__container,
+.order__p,
+.summary,
+.summary__container,
+.summary__p,
+.payment-status__container,
+.page-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__content-div-two,
+.cart-item,
+.cart__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header,
+.form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.header {
   position: fixed;
   top: 0;
   left: 0;
@@ -92,9 +204,9 @@ Utilities → small overrides */
 /* Footer */
 
 .footer {
-  background: var(--main-dark-green);
   padding: 40px 20px;
   text-align: center;
+  background: var(--main-dark-green);
 }
 
 /* ==================================================
@@ -132,25 +244,21 @@ Utilities → small overrides */
   padding: 2rem;
   width: 100%;
 }
-
 .hero__button,
 .form__button,
 .cart__checkout-button {
-  display: flex;
+  flex-direction: column;
   width: var(--hero-btn-width);
   height: var(--hero-btn-height);
   padding: var(--hero-btn-padding);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: var(--hero-btn-gap);
   border-radius: var(--hero-btn-radius);
-  background: var(--secondary-light-green);
-  box-shadow: var(--hero-btn-box-shadow);
-  color: var(--color-white);
   font-size: var(--hero-btn-font-size);
   font-weight: var(--hero-btn-font-weight);
   line-height: var(--hero-btn-line-height);
+  background: var(--secondary-light-green);
+  box-shadow: var(--hero-btn-box-shadow);
+  color: var(--color-white);
 }
 
 /* Shared fade-up animation state */
@@ -183,22 +291,21 @@ Utilities → small overrides */
 .summary__title,
 .payment__title {
   margin-bottom: 20px;
-  transform: translateY(50px);
-  animation-delay: 0.6s;
   background: linear-gradient(
     45deg,
     var(--main-dark-green),
     var(--secondary-light-green)
   );
   line-height: var(--h1-line-height);
-  background-clip: text;
-  font-weight: bold;
-  color: var(--h1-font-color);
   font-size: var(--h1-font-size);
+  font-weight: bold;
+  background-clip: text;
+  color: var(--h1-font-color);
+  transform: translateY(50px);
+  animation-delay: 0.6s;
 }
 
 /* Shared label style for contact & booking */
-
 .contact__subtitle-container,
 .booking-date__subtitle-container,
 .cart__subtitle-container,
@@ -206,9 +313,6 @@ Utilities → small overrides */
 .order__subtitle-container,
 .summary__subtitle-container,
 .payment_subtitle-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 1rem;
 }
 
@@ -217,11 +321,7 @@ Utilities → small overrides */
 .order__subtitle,
 .cart__subtitle,
 .summary__subtitle,
-.booking-date__subtitle,
 .payment__subtitle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: var(--h3-height);
   line-height: var(--h3-line-height);
   font-size: var(--h3-font-size);
@@ -249,9 +349,6 @@ Utilities → small overrides */
 /* Header */
 
 .header__logo {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   width: 20%;
 }
 
@@ -270,15 +367,12 @@ Utilities → small overrides */
 /* Hero */
 
 .hero {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  z-index: 1;
+  overflow: hidden;
   height: 100%;
   text-align: center;
-  overflow: hidden;
   position: relative;
-  z-index: 1;
   color: var(--color-white);
 }
 
@@ -292,11 +386,11 @@ Utilities → small overrides */
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: -2;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
-  z-index: -2;
 }
 
 .hero__overlay {
@@ -315,18 +409,15 @@ Utilities → small overrides */
 }
 
 .hero__content-div-one {
-  height: 80%;
   display: flex;
   flex-direction: column;
+  height: 80%;
   padding: 2rem;
   padding-top: 5rem;
 }
 
 .hero__content-div-two {
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   height: 20%;
 }
 
@@ -334,16 +425,7 @@ Utilities → small overrides */
   color: var(--color-white);
 }
 
-.hero__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .hero__subtitle-two {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: var(--h3-height);
   line-height: var(--h3-line-height);
   font-size: var(--h3-font-size);
@@ -354,27 +436,26 @@ Utilities → small overrides */
 .hero__badge {
   display: inline-block;
   padding: 6px 16px;
+  margin: 0 0 20px 0;
+  font-size: 14px;
   background-color: var(--main-dark-green);
   border-radius: 30px;
-  font-size: 14px;
-  margin-bottom: 20px;
   animation-delay: 0.2s;
 }
 
 .hero__subtitle {
   height: var(--h3-height);
   width: var(--h3-width);
+  margin-bottom: 40px;
   line-height: var(--h3-line-height);
   font-size: var(--h3-font-size);
   font-weight: var(--h3-font-weight);
   color: var(--h3-font-color);
-  margin-bottom: 40px;
   transform: translateY(50px);
   animation-delay: 1s;
 }
 
 .hero__buttons {
-  display: flex;
   gap: 20px;
   transform: translateY(50px);
   animation-delay: 1.4s;
@@ -391,9 +472,6 @@ Utilities → small overrides */
 
 .cart {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 2rem;
   color: #1f2937;
 }
@@ -403,23 +481,23 @@ Utilities → small overrides */
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  max-width: 520px;
   width: 100%;
   height: 100vh;
+  max-width: 520px;
   margin: 0 auto;
   padding: 2rem;
 }
 
 .cart__header {
-  text-align: center;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .cart__title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #065f46;
   letter-spacing: 0.05em;
+  color: #065f46;
 }
 
 .cart__subtitle {
@@ -434,14 +512,9 @@ Utilities → small overrides */
 }
 
 .cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: #e6f7f1;
   padding: 0.9rem 1.1rem;
   border-radius: 14px;
-
+  background: #e6f7f1;
   box-shadow: none;
   transition: transform 0.15s ease;
 }
@@ -458,18 +531,18 @@ Utilities → small overrides */
 }
 
 .cart-item__title {
+  display: flex;
+  align-items: center;
   font-size: 0.95rem;
   font-weight: 600;
   color: #1f2937;
-  display: flex;
-  align-items: center;
 }
 
 .cart-item__title::before {
   content: "✔";
+  margin-right: 0.5rem;
   color: #10b981;
   font-size: 0.9rem;
-  margin-right: 0.5rem;
 }
 
 .cart-item__price {
@@ -488,11 +561,9 @@ Utilities → small overrides */
   height: 28px;
   border-radius: 999px;
   border: none;
-
+  font-weight: 600;
   background: white;
   color: #065f46;
-  font-weight: 600;
-
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   cursor: pointer;
 }
@@ -507,14 +578,9 @@ Utilities → small overrides */
 }
 
 .cart__summary {
-  margin-top: 2rem;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: transparent;
   padding: 0;
+  margin: 2rem 0 0 0;
+  background: transparent;
   box-shadow: none;
 }
 
@@ -531,21 +597,14 @@ Utilities → small overrides */
 }
 
 /* Form */
-
 .form {
-  display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   width: 100%;
   height: 60vh;
 }
 
 .form__field {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
 }
 
@@ -555,10 +614,10 @@ Utilities → small overrides */
 }
 
 .form__error {
-  font-size: 0.75rem;
-  color: #f00;
   margin-top: 8px;
+  font-size: 0.75rem;
   font-weight: 500;
+  color: #f00;
 }
 
 /* Shared underline input for contact & booking & payment */
@@ -570,20 +629,12 @@ Utilities → small overrides */
   padding: 0.3rem 0;
   font-size: 1rem;
   background: var(--color-white);
-  transition: border-color 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
 }
 
 .form__input:focus {
   outline: none;
-}
-
-/* Shared CTA button for contact, booking, payment */
-
-.form__button-container {
-  display: flex;
-  justify-self: center;
-  align-items: center;
 }
 
 /* Payment step on form styles */
@@ -594,8 +645,8 @@ Utilities → small overrides */
   gap: 16px;
   padding: 18px 0;
   border-bottom: 1px solid #e5e5e5;
-  cursor: pointer;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .form__option--active {
@@ -607,52 +658,69 @@ Utilities → small overrides */
 }
 
 .form__custom-radio {
+  position: relative;
   width: 18px;
   height: 18px;
   border: 1px solid #111;
   border-radius: 50%;
-  position: relative;
 }
 
 .form__radio:checked + .form__custom-radio::after {
   content: "";
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: 8px;
   height: 8px;
   background: #111;
   border-radius: 50%;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
 }
 
 /* Contact */
 .contact {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  text-align: center;
-  overflow: hidden;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  height: auto;
+  text-align: center;
   color: #fff;
 }
 
 /* Booking date */
-
 .booking-date {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  text-align: center;
-  overflow: hidden;
   position: relative;
   z-index: 1;
-  color: #fff;
+  overflow: hidden;
+  height: auto;
+  text-align: center;
+  color: var(--color-white);
+}
+
+.booking-date__title {
+  line-height: 3rem;
+  background-clip: text;
+}
+
+.booking-date__subtitle-container {
+  height: auto;
+  width: 100%;
+}
+
+.booking-date__icon-container {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100%; */
+}
+
+.booking-date__icon {
+  display: flex;
+  justify-content: center;
+  align-items: start;
 }
 
 .booking-date__container .form {
@@ -662,9 +730,9 @@ Utilities → small overrides */
 /* Calendar container */
 /* --- RESPONSIVE WRAPPER --- */
 .calendar-wrapper {
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
   margin-top: 15px;
 }
 
@@ -672,48 +740,45 @@ Utilities → small overrides */
 .react-calendar.custom-calendar {
   width: 100%;
   max-width: 400px; /* Limits size on Desktop */
-  background: white;
   border: none;
   border-radius: 24px;
   padding: 20px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
   font-family: "Inter", sans-serif; /* Or your preferred font */
+  background: white;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
 }
 
 /* --- NAVIGATION (Month/Year) --- */
 .react-calendar__navigation {
-  margin-bottom: 15px;
   height: 50px;
+  margin-bottom: 15px;
 }
 
 .react-calendar__navigation button {
-  color: #34b68d; /* Your vibrant green */
   font-weight: 700;
   font-size: 1.1rem;
   background: none;
+  color: #34b68d; /* Your vibrant green */
 }
 
 .react-calendar__navigation button:enabled:hover {
-  background-color: #f0fdf9;
   border-radius: 12px;
+  background-color: #f0fdf9;
 }
 
 /* --- WEEKDAYS (S M T W T F S) --- */
 .react-calendar__month-view__weekdays__weekday abbr {
+  font-weight: 600;
+  font-size: 0.8rem;
   text-decoration: none;
   text-transform: uppercase;
   color: #aab6b0;
-  font-weight: 600;
-  font-size: 0.8rem;
 }
 
 /* --- DAY TILES (Responsiveness Fix) --- */
 .react-calendar__tile {
-  aspect-ratio: 1 / 1; /* Keeps them perfectly square */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0;
+  aspect-ratio: 1 / 1; /* Keeps them perfectly square */
   font-size: 0.95rem;
   color: #4f7361;
   transition: all 0.2s ease;
@@ -721,40 +786,34 @@ Utilities → small overrides */
 
 /* --- SELECTED DAY (The Green Circle) --- */
 .react-calendar__tile--active {
-  background: #2a5a4b; /* Dark green from your design */
-  color: white;
-  font-weight: 700;
   border-radius: 50%; /* Forces the circle */
+  font-weight: 700;
+  background: #2a5a4b; /* Dark green from your design */
+  color: var(--color-white);
   transform: scale(0.85); /* Slightly smaller so it looks clean */
 }
 
 /* --- HOVER & TODAY --- */
 .react-calendar__tile:enabled:hover {
-  background-color: #e6f7f2;
   border-radius: 50%;
+  background-color: #e6f7f2;
 }
 
 .react-calendar__tile--now {
-  background: #f0fdf9;
-  color: #34b68d;
   border-radius: 50%;
   font-weight: 700;
+  background: #f0fdf9;
+  color: #34b68d;
 }
 
 /* Time */
 
 .form__schedule-grid-container {
   height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .schedule-grid {
-  display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   height: 70%;
 }
 
@@ -763,43 +822,32 @@ Utilities → small overrides */
 .payment {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  text-align: center;
-  overflow: hidden;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  height: auto;
+  text-align: center;
 }
 
 .form__payment-method {
-  display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   height: 60vh;
 }
 
 /* Order */
 
 .order {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  text-align: center;
-  overflow: hidden;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  height: auto;
+  text-align: center;
   color: #fff;
 }
 
 .order__container {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 90%;
   max-width: 980px;
   margin: 0 auto;
@@ -808,51 +856,48 @@ Utilities → small overrides */
 /* CARD */
 .order__summary {
   width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
   padding: 18px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  max-width: 420px;
+  border-radius: 18px;
   font-family:
     system-ui,
     -apple-system,
     sans-serif;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   transition: all 0.2s ease;
 }
 
 /* HEADINGS */
 .order__h3 {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #6b7280;
   margin-top: 12px;
   margin-bottom: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  color: #6b7280;
 }
 
 /* VALUES */
 .order__p {
-  font-size: 0.9rem;
-  color: #064e3b;
-  background: #ecfdf5;
   border-radius: 8px;
   padding: 8px 10px;
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 0.9rem;
+  color: #064e3b;
+  background: #ecfdf5;
 }
 
 /* ITEMS */
 .order__div {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
   font-size: 0.9rem;
   color: #065f46;
   background: #f0fdf4;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-top: 6px;
 }
 
 /* TOTAL */
@@ -860,8 +905,8 @@ Utilities → small overrides */
   margin-top: 20px;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #065f46;
   text-align: center;
+  color: #065f46;
 }
 
 /* BUTTON */
@@ -871,10 +916,10 @@ Utilities → small overrides */
   padding: 10px;
   border: none;
   border-radius: 10px;
-  background: #10b981;
-  color: white;
   font-weight: 600;
   font-size: 0.95rem;
+  background: #10b981;
+  color: white;
   cursor: pointer;
 }
 
@@ -886,31 +931,25 @@ Utilities → small overrides */
 .order__p::before,
 .order__div::before {
   content: "✔";
+  margin-right: 8px;
   color: #10b981;
   font-weight: bold;
-  margin-right: 8px;
 }
 
 /* Payment Summary */
 
 .summary {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  text-align: center;
-  overflow: hidden;
   position: relative;
   z-index: 1;
-  color: #fff;
+  overflow: hidden;
+  height: auto;
+  text-align: center;
+  color: var(---color-white);
 }
 
 .summary__container {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 90%;
   max-width: 980px;
   margin: 0 auto;
@@ -919,29 +958,26 @@ Utilities → small overrides */
 .summary__section {
   width: 100%;
   max-width: 420px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
   border-radius: 18px;
   margin: 0.5rem 0;
   padding: 18px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   font-family:
     system-ui,
     -apple-system,
     sans-serif;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   transition: all 0.2s ease;
 }
 
 .summary__p {
+  padding: 8px 10px;
+  margin: 0;
+  border-radius: 8px;
   font-size: 0.9rem;
   color: #064e3b;
   background: #ecfdf5;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .summary__button {
@@ -950,16 +986,18 @@ Utilities → small overrides */
   padding: 10px;
   border: none;
   border-radius: 10px;
-  background: #10b981;
-  color: white;
   font-weight: 600;
   font-size: 0.95rem;
+  background: #10b981;
+  color: var(--color-white);
   cursor: pointer;
 }
 
 .summary__button {
   background: #059669;
 }
+
+/*************** here **************/
 
 /* Payment Success */
 
@@ -973,12 +1011,9 @@ Utilities → small overrides */
 }
 
 .payment-status__container {
+  justify-content: center;
   max-width: 450px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 60px 40px;
   border: 3px solid #000;
   background-color: #fff;
@@ -986,13 +1021,13 @@ Utilities → small overrides */
 }
 
 .payment-status__title {
+  margin: 0 0 30px;
   font-size: 1.4rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.5px;
-  margin: 0 0 30px;
-  color: #000;
   line-height: 1.2;
+  color: #000;
 }
 
 .payment-status__loader {
@@ -1012,17 +1047,17 @@ Utilities → small overrides */
 }
 
 .payment-status__text {
+  font-weight: 600;
+  letter-spacing: 2px;
   font-size: 0.85rem;
   color: #000;
   text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
 }
 
 .payment-status__icon {
+  margin-top: 10px;
   font-size: 4rem;
   font-weight: bold;
-  margin-top: 10px;
   animation: scaleUp 0.3s ease-out;
 }
 
@@ -1046,18 +1081,18 @@ Utilities → small overrides */
 /* Thankyou page */
 
 .thank-you {
-  padding: 50px 20px;
   display: flex;
   justify-content: center;
+  padding: 50px 20px;
   min-height: 80vh;
 }
 
 .thank-you__card {
+  max-width: 500px;
+  width: 100%;
   padding: 30% 40px;
   border-radius: var(--radius-card);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  max-width: 500px;
-  width: 100%;
   text-align: center;
 }
 
@@ -1070,9 +1105,9 @@ Utilities → small overrides */
 }
 
 .thank-you__receipt {
-  text-align: left;
   padding: 20px;
   border-radius: 8px;
+  text-align: left;
   border: 1px solid #eee;
 }
 
@@ -1114,9 +1149,9 @@ Utilities → small overrides */
 }
 
 .thank-you__actions {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
   gap: 15px;
 }
 
@@ -1124,40 +1159,36 @@ Utilities → small overrides */
   padding: 12px;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   font-weight: bold;
   transition: opacity 0.2s;
+  cursor: pointer;
 }
 
 .thank-you__btn--download {
   color: #fff;
 }
 .thank-you__link {
-  color: #0984e3;
-  text-decoration: none;
   font-size: 0.9rem;
+  text-decoration: none;
+  color: #0984e3;
 }
 
 /* With Status Handler / Page State (loading / error / empty) */
-
 .page-state {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 2rem;
 }
 
 .page-state__content {
-  text-align: center;
   max-width: 420px;
   width: 100%;
+  text-align: center;
 }
 
 .page-state__title {
+  margin-bottom: 0.75rem;
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
 }
 
 .page-state__message {
@@ -1205,19 +1236,13 @@ Utilities → small overrides */
   border-radius: 1.5625rem;
   background-color: #34b68d80;
   outline: 1px solid #00d5be;
-
-  /* Text */
-  color: rgba(255, 255, 255, 0.85);
   font-size: 16px;
   font-weight: 500;
-
-  /* Blur effect (glass look) */
   backdrop-filter: blur(1px);
-
-  /* Glow + depth */
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.2),
     0 0 12px rgba(52, 182, 141, 0.4);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* ===================================================
@@ -1270,13 +1295,13 @@ Utilities → small overrides */
 
   .header__nav {
     position: absolute;
+    z-index: 300;
     top: 100%;
     right: 0;
     width: 100vw;
     background-color: #fff;
     transform: translateX(100%);
     transition: all 0.3s ease-in-out;
-    z-index: 300;
   }
 
   .header__nav--open {
@@ -1334,16 +1359,16 @@ Utilities → small overrides */
     display: block;
     height: 3px;
     width: 100%;
-    background-color: var(--main-dark-green);
     border-radius: 2px;
+    background-color: var(--main-dark-green);
     transition: all 0.3s ease;
   }
 
   .about-us-section__slider-3d-container {
+    flex: none;
     perspective: 600px;
     height: 500px;
     width: 100vw;
-    flex: none;
   }
 
   .about-us-section__slider-3d-item {
@@ -1416,12 +1441,12 @@ Utilities → small overrides */
     font-size: 1.9rem;
   }
   .error-fallback__message {
-    font-size: 0.95rem;
     padding: 1rem;
+    font-size: 0.95rem;
   }
   .error-fallback__button {
-    font-size: 1rem;
     padding: 0.6rem 1.2rem;
+    font-size: 1rem;
   }
 
   .order__summary {
@@ -1435,8 +1460,8 @@ Utilities → small overrides */
 
   .order__p,
   .order__div {
-    font-size: 0.95rem;
     padding: 10px 12px;
+    font-size: 0.95rem;
   }
 
   .order__h2 {
@@ -1483,8 +1508,8 @@ Utilities → small overrides */
   }
 
   .order__button {
-    font-size: 1rem;
     padding: 12px;
+    font-size: 1rem;
   }
 }
 

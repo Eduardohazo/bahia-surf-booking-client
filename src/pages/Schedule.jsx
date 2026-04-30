@@ -9,7 +9,7 @@ const ScheduleSelection = () => {
     setSchedule,
     scheduleValidators,
   );
-  
+
   const handleScheduleSelect = (time) => {
     // 1. Manually trigger the change so useForm updates Redux
     handleChange({
@@ -27,8 +27,19 @@ const ScheduleSelection = () => {
 
       <div className="booking-date__container">
         <header className="booking-date__header">
-          <h1 className="booking-date__title">Choose your wave</h1>
-          <p className="booking-date__subtitle">Select a schedule</p>
+          <h1 className="booking-date__title">
+            Choose <br />
+            your wave!
+          </h1>
+          <div className="booking-date__subtitle-container">
+            <div className="booking-date__icon-container">
+              <i className="booking-date__icon fas fa-clock"></i>
+            </div>
+            <p className="booking-date__subtitle">
+              Pick the time that <br />
+              fits you best
+            </p>
+          </div>
         </header>
 
         <form className="form" onSubmit={(e) => e.preventDefault()}>
