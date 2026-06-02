@@ -6,7 +6,7 @@ export const useForm = (selector, action, validators = {}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const values = useSelector(selector);
-
+  
   const [errors, setErrors] = useState({});
 
   const handleChange = async (e) => {

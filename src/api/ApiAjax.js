@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:3000/api"; // *
-// const BASE_URL = "https://bahia-surf-res-api-1.onrender.com/api"; // *
+// const BASE_URL = "http://localhost:3000/api"; // *
+const BASE_URL = "https://bahia-surf-res-api-1.onrender.com/api"; // *
 
 async function request(endpoint, options = {}) {
   const { signal, ...customConfig } = options;
